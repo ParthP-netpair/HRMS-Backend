@@ -1,0 +1,170 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.schemaValidation = void 0;
+const mongoose_1 = require("mongoose");
+const tempEmpanelment_1 = require("../types/tempEmpanelment");
+const constants_1 = require("../utils/constants");
+const zod_1 = __importDefault(require("zod"));
+const user_1 = require("../types/user");
+const docusign_1 = require("../docusign");
+const TempEmpanelmentSchema = new mongoose_1.Schema(Object.assign({ incrementalId: { type: String, unique: true }, basicDetails: {
+        _id: false,
+        providerName: String,
+        pincodeId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.Pincode },
+        pincode: String,
+        state: String,
+        city: String,
+        zone: String,
+        addressLineOne: String,
+        addressLineTwo: String,
+        landmark: String,
+        telephone: String,
+        website: String,
+        fax: String,
+        longitude: String,
+        latitude: String,
+        googlePlusCode: String,
+    }, contactDetails: {
+        _id: false,
+        primaryContactName: String,
+        primaryContactEmail: String,
+        secondaryContactName: String,
+        secondaryContactEmail: String,
+    }, ownershipDetails: {
+        _id: false,
+        ownershipTypeId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.OwnershipType },
+        ownershipName: String,
+        ownerContactNo: String,
+        cuin: String,
+        panName: String,
+        panNo: String,
+        panDob: Date,
+        panVerificationId: mongoose_1.Schema.Types.ObjectId,
+        aadharName: String,
+        aadharNo: String,
+        aadharVerificationId: mongoose_1.Schema.Types.ObjectId,
+        officeAddressLineOne: String,
+        officeAddressLineTwo: String,
+        officeState: String,
+        officeCity: String,
+        officePincode: String,
+        authorizedSignatoryName: String,
+        authorizedSignatoryDesignation: String,
+        authorizedSignatoryEmail: String,
+    }, bankDetails: {
+        _id: false,
+        bankAccName: String,
+        bankAccNo: String,
+        bankAccIFSC: String,
+        bankName: String,
+        bankBranch: String,
+        bankAccType: String,
+        bankBranchCity: String,
+        bankVerificationId: mongoose_1.Schema.Types.ObjectId,
+    }, documents: mongoose_1.Schema.Types.Mixed, verificationStatusByNw: { type: String, default: tempEmpanelment_1.EVerificationProcess.Pending }, nwVerificationHistory: [
+        {
+            statusFrom: String,
+            statusTo: String,
+            updatedBy: mongoose_1.Schema.Types.ObjectId,
+            updatedAt: Date,
+            remark: String,
+        },
+    ], verifiedByNwUser: mongoose_1.Schema.Types.ObjectId, verifiedByNwDate: Date, verificationStatusByLegal: { type: String, default: tempEmpanelment_1.EVerificationProcess.Pending }, legalVerificationHistory: [
+        {
+            statusFrom: String,
+            statusTo: String,
+            updatedBy: mongoose_1.Schema.Types.ObjectId,
+            updatedAt: Date,
+            remark: String,
+        },
+    ], verifiedByLegalUser: mongoose_1.Schema.Types.ObjectId, verifiedByLegalDate: Date, returnedByLegalUser: mongoose_1.Schema.Types.ObjectId, returnedByLegalDate: Date, docusignDetails: {
+        envelopeStatus: { type: String, default: docusign_1.EDocusignStatus.pending },
+        envelopeId: String,
+        envelopeDate: Date,
+        envelopeExpireDate: Date,
+        envelopeUri: String,
+    }, docusignRetryCount: Number, empanelmentStatus: { type: String, default: tempEmpanelment_1.EDCEmpanelmentStatus.Pending }, parentTicketDbId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.Ticket }, parentTicketFdId: String, childTicketDbId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.ChildTicket }, childTicketFdId: String, tempProspectiveProviderId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.TempEmpanelment }, availableTestIds: { type: [mongoose_1.Schema.Types.ObjectId], ref: constants_1.COLLECTIONS.TestMaster }, staff: [
+        {
+            staffType: String,
+            name: String,
+            gender: String,
+            qualificationId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.Qualification },
+            otherQualification: String,
+            registrationNo: String,
+            councilId: { type: mongoose_1.Schema.Types.ObjectId, ref: constants_1.COLLECTIONS.Council },
+            otherCouncil: String,
+            _id: false,
+            isAvailable: Boolean,
+        },
+    ], isEditable: { type: Boolean, default: false }, nwUnverifiedFields: [String], legalUnverifiedFields: [String] }, constants_1.commonDbFields), constants_1.schemaOptions);
+const TempEmpanelment = (0, mongoose_1.model)('TempEmpanelment', TempEmpanelmentSchema, constants_1.COLLECTIONS.TempEmpanelment);
+exports.default = TempEmpanelment;
+exports.schemaValidation = zod_1.default.object({
+    basicDetails: zod_1.default.object({
+        providerName: zod_1.default.string().optional(),
+        pincodeId: zod_1.default.string(),
+        pincode: zod_1.default.string().optional(),
+        state: zod_1.default.string().optional(),
+        city: zod_1.default.string().optional(),
+        zone: zod_1.default.nativeEnum(user_1.EZones),
+        addressLineOne: zod_1.default.string().optional(),
+        addressLineTwo: zod_1.default.string().optional(),
+        landmark: zod_1.default.string().optional(),
+        telephone: zod_1.default.string().optional(),
+        website: zod_1.default.string().optional(),
+        fax: zod_1.default.string().optional(),
+        longitude: zod_1.default.string().optional(),
+        latitude: zod_1.default.string().optional(),
+        googlePlusCode: zod_1.default.string().optional(),
+    }),
+    contactDetails: zod_1.default.object({
+        primaryContactName: zod_1.default.string().optional(),
+        primaryContactEmail: zod_1.default.string().optional(),
+        secondaryContactName: zod_1.default.string().optional(),
+        secondaryContactEmail: zod_1.default.string().optional(),
+    }),
+    ownershipDetails: zod_1.default.object({
+        ownershipTypeId: zod_1.default.string().optional(),
+        ownershipName: zod_1.default.string().optional(),
+        ownerContactNo: zod_1.default.string().optional(),
+        cuin: zod_1.default.string().optional(),
+        panName: zod_1.default.string().optional(),
+        panNo: zod_1.default.string().optional(),
+        aadharName: zod_1.default.string().optional(),
+        aadharNo: zod_1.default.string().optional(),
+        officeAddressLineOne: zod_1.default.string().optional(),
+        officeAddressLineTwo: zod_1.default.string().optional(),
+        officeState: zod_1.default.string().optional(),
+        officeCity: zod_1.default.string().optional(),
+        officePincode: zod_1.default.string().optional(),
+        authorizedSignatoryName: zod_1.default.string().optional(),
+        authorizedSignatoryDesignation: zod_1.default.string().optional(),
+        authorizedSignatoryEmail: zod_1.default.string().optional(),
+    }),
+    bankDetails: zod_1.default.object({
+        bankAccName: zod_1.default.string().optional(),
+        bankAccNo: zod_1.default.string().optional(),
+        bankAccIFSC: zod_1.default.string().optional(),
+        bankName: zod_1.default.string().optional(),
+        bankBranch: zod_1.default.string().optional(),
+        bankBranchCity: zod_1.default.string().optional(),
+        bankAccType: zod_1.default.nativeEnum(tempEmpanelment_1.EBankAccTypes),
+    }),
+    documents: zod_1.default.any(),
+    tempProspectiveProviderId: zod_1.default.string(),
+    availableTestIds: zod_1.default.array(zod_1.default.string()),
+    staff: zod_1.default.array(zod_1.default.object({
+        staffType: zod_1.default.nativeEnum(tempEmpanelment_1.EStaffType),
+        name: zod_1.default.string(),
+        gender: zod_1.default.nativeEnum(tempEmpanelment_1.EGender).optional(),
+        qualificationId: zod_1.default.string().optional(),
+        otherQualification: zod_1.default.string().optional(),
+        registrationNo: zod_1.default.string(),
+        councilId: zod_1.default.string().optional(),
+        otherCouncil: zod_1.default.string().optional(),
+        isAvailable: zod_1.default.boolean().optional(),
+    })),
+});

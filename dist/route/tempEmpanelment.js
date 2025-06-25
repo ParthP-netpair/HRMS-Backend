@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const tempEmpanelment_1 = require("../controller/tempEmpanelment");
+const route_enums_1 = require("../utils/route.enums");
+const auth_1 = __importDefault(require("../middleware/auth"));
+const tempEmpanelmentRoute = express_1.default.Router();
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.getOne, tempEmpanelment_1.getOneTempEmpanelCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.editByDc, tempEmpanelment_1.editTempEmpanelByDcCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.selfCreate, tempEmpanelment_1.createSelfTempEmpanelmentCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.manualCreate, auth_1.default, tempEmpanelment_1.createManualTempEmpanelmentCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.changeStatusByLegal, auth_1.default, tempEmpanelment_1.changeStatusByLegalCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.changeStatusByNw, auth_1.default, tempEmpanelment_1.changeStatusByNwCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.count, auth_1.default, tempEmpanelment_1.dcVerificationCountCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.nwList, auth_1.default, tempEmpanelment_1.tempEmpanelByStatusCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.legalList, auth_1.default, tempEmpanelment_1.tempEmpanelForLegalCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.proceedDocusign, auth_1.default, tempEmpanelment_1.proceedDocusignCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.editByNw, auth_1.default, tempEmpanelment_1.editTempEmpanelByNwCtl);
+tempEmpanelmentRoute.post(route_enums_1.TEMP_EMPANELMENT_ROUTE.empanel, auth_1.default, tempEmpanelment_1.empanelProviderCtl);
+exports.default = tempEmpanelmentRoute;
