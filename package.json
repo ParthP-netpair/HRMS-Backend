@@ -8,7 +8,12 @@
     "build": "npx tsc && copyfiles -u 1 src/keys/**/* dist && copyfiles -u 1 src/docusign/**/*.html dist",
     "serve": "node dist/index.js",
     "lint": "eslint src/**/*.ts",
-    "format": "eslint src/**/*.ts --fix"
+    "format": "eslint src/**/*.ts --fix",
+    "seed:role": "ts-node src/seeders/role.ts",
+    "seed:department": "ts-node src/seeders/department.ts",
+    "seed:designation": "ts-node src/seeders/designation.ts",
+    "seed:admin": "ts-node src/seeders/admin.ts",
+    "seed:all": "npm-run-all seed:role seed:department seed:designation seed:admin"
   },
   "author": "",
   "license": "ISC",
@@ -52,6 +57,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "mongoose": "^7.5.0",
     "nodemon": "^3.0.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.0.2",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",

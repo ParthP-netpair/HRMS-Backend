@@ -10,4 +10,5 @@ export enum COMMON_MESSAGE {
   TokenExpired = 'Link expired.',
   PasswordExpired = 'Password expired, please reset it.',
   NotFoundWoParam = 'Not found.',
+  InvalidOtp = 'Invalid otp.',
 }

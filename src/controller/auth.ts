@@ -1,13 +1,13 @@
 import {
   currentUserService,
-  signupService,
+  createSingupUser,
   loginService,
   changePasswordService,
   forgotPasswordService,
 } from '../services/auth';
 
 export const signupCtl = async (req, res, next) => {
-  const result = await signupService(req, res, next);
+  const result = await createSingupUser(req, res, next);
   return res.json(result);
 };
 export const loginCtl = async (req, res, next) => {

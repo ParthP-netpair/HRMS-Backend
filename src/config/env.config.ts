@@ -30,6 +30,8 @@ interface ICustomProcessEnv {
   FRS_ATLAS_PASSWORD: string;
   FRS_ATLAS_URL: string;
   BACKEND_URL: string;
+  OTP_EXPIRY_MINUTES: string;
+  OTP_LENGTH: string;
 }
 
 /**
@@ -47,5 +49,7 @@ export default function getEnv<T extends keyof ICustomProcessEnv>(key: T): strin
   if (key === 'RESET_PASSWORD_EXPIRY_MINUTES') return val ?? '10';
   if (key === 'PASSWORD_EXPIRY_MONTHS') return val ?? '3';
   if (key === 'TICKET_UPDATE_DELAY') return val ?? '8000';
+  if (key === 'OTP_EXPIRY_MINUTES') return val ?? '6';
+  if (key === 'OTP_LENGTH') return val ?? '6';
   return val;
 }
