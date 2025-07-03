@@ -13,7 +13,8 @@
     "seed:department": "ts-node src/seeders/department.ts",
     "seed:designation": "ts-node src/seeders/designation.ts",
     "seed:admin": "ts-node src/seeders/admin.ts",
-    "seed:all": "npm-run-all seed:role seed:department seed:designation seed:admin"
+    "seed:leaveType": "ts-node src/seeders/leave.ts",
+    "seed:all": "npm-run-all seed:role seed:department seed:designation seed:admin seed:leaveType"
   },
   "author": "",
   "license": "ISC",

@@ -14,8 +14,9 @@ const UserSchema = new Schema<TUserAttributes>(
     dob: { type: Date },
     profilePhoto: { type: String, default: null },
     legalId: { type: String, default: null },
-    roleId: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
-    designationId: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
+    roleId: { type: Schema.Types.ObjectId, ref: 'roles', required: true },
+    designationId: { type: Schema.Types.ObjectId, ref: 'designations', required: true },
+    reportingId: { type: Schema.Types.ObjectId, ref: 'users', default: null },
 
     // Financial Info
     panNumber: { type: String, default: null },
@@ -50,7 +51,7 @@ const UserSchema = new Schema<TUserAttributes>(
   schemaOptions,
 );
 
-const User = model<TUserAttributes>('User', UserSchema, COLLECTIONS.User);
+const User = model<TUserAttributes>('users', UserSchema, COLLECTIONS.User);
 export default User;
 
 export const schemaValidation = z.object({
@@ -65,6 +66,7 @@ export const schemaValidation = z.object({
   legalId: z.string().optional(),
   roleId: z.string(),
   designationId: z.string(),
+  reportingId: z.string().optional(),
 
   // Financial Info
   panNumber: z.string().optional(),

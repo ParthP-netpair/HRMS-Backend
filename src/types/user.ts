@@ -12,6 +12,7 @@ export interface TPersonalInfo {
   legalId: string;
   roleId: mongoose.Types.ObjectId;
   designationId: mongoose.Types.ObjectId;
+  reportingId: mongoose.Types.ObjectId;
 }
 
 export interface TFinancialInfo {
@@ -53,3 +54,43 @@ export enum EUserRole {
   Manager = 'Manager',
   Employee = 'Employee',
 }
+
+export type TUserDecodeAttributes = {
+  _id: string;
+  email: string;
+  aadharNumber: string | null;
+  bankAccountNumber: string | null;
+  certificateUrl: string | null;
+  contactNo: string | null;
+  createdAt: string;
+  ctc: number;
+  deletedAt: string | null;
+  designationId: string;
+  firstName: string;
+  gender: string | null;
+  ifscCode: string | null;
+  isActive: boolean;
+  isDeleted: boolean;
+  lastLoginAt: string;
+  lastName: string;
+  legalId: string | null;
+  netSalary: number;
+  offerLetterUrl: string | null;
+  panNumber: string | null;
+  passwordExpireAt: string | null;
+  photoUrl: string | null;
+  profilePhoto: string | null;
+  resetPasswordExpireAt: string | null;
+  resetPasswordToken: string | null;
+  resumeUrl: string | null;
+  role: string;
+  roleId: string;
+  uanNumber: string | null;
+  updatedAt: string;
+};
+
+export type TDecodedToken = {
+  user: TUserDecodeAttributes;
+  iat: number;
+  exp: number;
+};

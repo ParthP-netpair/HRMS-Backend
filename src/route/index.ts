@@ -4,6 +4,7 @@ import userRoute from './user';
 import authRoute from './auth';
 import designationRoute from './designation';
 import dropDownRoute from './dropDown';
+import leaveMangementRoute from './leaveManagement';
 
 const appRoute = express.Router();
 
@@ -12,5 +13,6 @@ appRoute.use(commonRoute);
 appRoute.use(userRoute);
 appRoute.use(designationRoute);
 appRoute.use(dropDownRoute);
+appRoute.use(leaveMangementRoute);
 
 export default appRoute;

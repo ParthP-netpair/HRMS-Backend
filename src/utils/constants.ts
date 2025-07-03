@@ -1,10 +1,15 @@
 import mongoose, { SchemaOptions } from 'mongoose';
 
 export enum COLLECTIONS {
-  User = 'user',
-  Otp = 'otp',
-  Device = 'device',
-  Designation = 'designation',
+  User = 'users',
+  Otp = 'otps',
+  Device = 'devices',
+  Designation = 'designations',
+  LeaveType = 'leave_types',
+  LeaveManagement = 'leave_managements',
+  Departments = 'departments',
+  Role = 'roles',
+  LeaveMaster = 'leave_masters',
 }
 
 export const commonDbFields = {

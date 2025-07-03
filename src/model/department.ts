@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { commonDbFields } from '../utils/constants';
+import { COLLECTIONS, commonDbFields } from '../utils/constants';
 
 export interface IDepartment extends Document {
   key: string;
@@ -17,6 +17,10 @@ const DepartmentSchema = new Schema<IDepartment>(
   { timestamps: true },
 );
 
-const Department = mongoose.model<IDepartment>('Department', DepartmentSchema);
+const Department = mongoose.model<IDepartment>(
+  'departments',
+  DepartmentSchema,
+  COLLECTIONS.Departments,
+);
 
 export default Department;

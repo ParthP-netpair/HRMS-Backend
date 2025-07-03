@@ -34,6 +34,7 @@ export const createUserService = asyncHandler(
       offerLetterUrl,
       certificateUrl,
       photoUrl,
+      reportingId,
     } = req.body;
 
     // ✅ Check if user already exists
@@ -86,27 +87,32 @@ export const createUserService = asyncHandler(
       photoUrl,
       role: roleData.key,
       passwordExpireAt,
+      reportingId,
     });
     return responseWrapper(true, COMMON_MESSAGE.Success, 201, 'Employee Created Successfully');
   },
 );
 
-// export const UserList = asyncHandler(
-//   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-//     const DesignationData = await User.find({ isActive: true, isDeleted: false });
-//     return responseWrapper(true, COMMON_MESSAGE.Success, 201, DesignationData);
-//   },
-// );
+export const UserList = asyncHandler(
+  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    const user = await User.find({
+      role: { $ne: 'Super_Admin' },
+      isActive: true,
+      isDeleted: false,
+    }).select('-password -passwordExpireAt');
+    return responseWrapper(true, COMMON_MESSAGE.Success, 200, user);
+  },
+);
 export const getOneUser = asyncHandler(
   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const { _id } = req.body;
     if (!_id) {
       return responseWrapper(false, '_id is required!', 404);
     }
-    const UserData = await User.find({ _id, isActive: true, isDeleted: false }).select(
+    const UserData = await User.findOne({ _id, isActive: true, isDeleted: false }).select(
       '-password -passwordExpireAt',
     );
-    return responseWrapper(true, COMMON_MESSAGE.Success, 201, UserData);
+    return responseWrapper(true, COMMON_MESSAGE.Success, 200, UserData);
   },
 );
 

@@ -5,7 +5,7 @@ import { DeviceAttributes, DeviceType } from '../types/device';
 
 const deviceMasterSchema = new Schema<DeviceAttributes>(
   {
-    userId: { type: Schema.Types.ObjectId, refPath: 'User', required: true },
+    userId: { type: Schema.Types.ObjectId, refPath: 'users', required: true },
     role: { type: String, required: true },
     deviceType: { type: String, enum: DeviceType, default: DeviceType.WEB },
     status: { type: Boolean, default: true },
@@ -16,5 +16,5 @@ const deviceMasterSchema = new Schema<DeviceAttributes>(
   schemaOptions,
 );
 
-const Device = mongoose.model<DeviceAttributes>('device', deviceMasterSchema, COLLECTIONS.Device);
+const Device = mongoose.model<DeviceAttributes>('devices', deviceMasterSchema, COLLECTIONS.Device);
 export default Device;

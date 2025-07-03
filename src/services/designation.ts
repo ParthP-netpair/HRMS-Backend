@@ -56,3 +56,4 @@ export const updateDesignation = asyncHandler(
     return responseWrapper(true, COMMON_MESSAGE.Success, 200, updatedDesignation);
   },
 );
+

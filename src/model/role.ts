@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { commonDbFields } from '../utils/constants';
+import { COLLECTIONS, commonDbFields } from '../utils/constants';
 
 export interface IRole extends Document {
   key: string;
@@ -17,6 +17,6 @@ const RoleSchema = new Schema<IRole>(
   { timestamps: true },
 );
 
-const Role = mongoose.model<IRole>('Role', RoleSchema);
+const Role = mongoose.model<IRole>('roles', RoleSchema, COLLECTIONS.Role);
 
 export default Role;

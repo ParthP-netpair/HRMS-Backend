@@ -13,6 +13,9 @@ export enum AUTH_ROUTE {
 export enum DROPDOWN_LIST {
   department = '/ddl/department',
   role = '/ddl/role',
+  leaveType = '/ddl/leave-type',
+  designation = '/ddl/designation/:id',
+  leaveManagement = '/ddl/leave-managment',
 }
 
 export enum USER_ROUTE {
@@ -27,4 +30,19 @@ export enum DESIGNATION_ROUTE {
   list = '/designation/list',
   getone = '/designation/getOne',
   update = '/designation/update',
+}
+
+export enum LEAVE_MANGEMENT_ROUTE {
+  create = '/leave-mangement/create',
+  list = '/leave-mangement/list',
+  getone = '/leave-mangement/getOne',
+  update = '/leave-mangement/update',
+  delete = '/leave-mangement/delete',
+}
+export enum LEAVE_MASTER_ROUTE {
+  create = '/leave-master/create',
+  list = '/leave-master/list',
+  getone = '/leave-master/getOne',
+  update = '/leave-master/update',
+  delete = '/leave-master/delete',
 }

@@ -6,8 +6,8 @@ import { z } from 'zod';
 const DesignationSchema = new Schema<IDesignation>(
   {
     name: { type: String, required: true },
-    roleId: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
-    departmentId: { type: Schema.Types.ObjectId, ref: 'Department', required: true },
+    roleId: { type: Schema.Types.ObjectId, ref: 'roles', required: true },
+    departmentId: { type: Schema.Types.ObjectId, ref: 'departments', required: true },
     description: { type: String },
     ...commonDbFields,
   },
@@ -15,7 +15,7 @@ const DesignationSchema = new Schema<IDesignation>(
   schemaOptions,
 );
 const Designation = mongoose.model<IDesignation>(
-  'Designation',
+  'designations',
   DesignationSchema,
   COLLECTIONS.Designation,
 );
