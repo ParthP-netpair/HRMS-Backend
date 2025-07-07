@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export enum LeaveStatus {
   Pending = 'Pending',
@@ -8,9 +8,10 @@ export enum LeaveStatus {
 
 export interface TLeaveMastersAttributes extends Document {
   userId: mongoose.Types.ObjectId;
-  leaveMangementId: mongoose.Types.ObjectId;
+  leaveManagementId: mongoose.Types.ObjectId;
   fromDate: Date;
   toDate: Date;
+  takeLeave: Number;
   reason?: string;
   status: LeaveStatus;
   appliedDate: Date;

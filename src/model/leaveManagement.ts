@@ -25,7 +25,9 @@ const LeaveManagement = mongoose.model<TLeaveManagementAttributes>(
 
 export default LeaveManagement;
 
-export const schemaValidation = z.object({
+export const schemaValidation = z.object(
+  {
+  
   name: z.string(),
   leaveTypeId: z.string(),
   count: z.number(),
